@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Justin Bieber</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f5f4ef;
+    --card: #ebe9e2;
+    --border: #d9d7d0;
+    --text: #111;
+    --muted: #77736d;
+    --pink: #ff4f91;
+    --player: 88px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-bottom: var(--player);
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+    height: 70px;
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: sticky;
+    top: 0;
+
+    background: rgba(245,244,239,.96);
+    backdrop-filter: blur(10px);
+
+    z-index: 100;
+}
+
+.logo {
+    position: absolute;
+    left: 30px;
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.search {
+    width: 320px;
+
+    padding: 12px 16px;
+
+    border: 1px solid var(--border);
+    background: transparent;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.search:focus {
+    border-color: #111;
+}
+
+
+/* =========================
+   PAGE VIEWS
+========================= */
+
+.page {
+    display: block;
+}
+
+.page.hidden {
+    display: none;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    padding: 30px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    position: relative;
+
+    height: 430px;
+
+    overflow: hidden;
+
+    margin-bottom: 55px;
+
+    background: #111;
+}
+
+.hero-slideshow {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    opacity: 0;
+
+    transition: opacity 1s ease;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to right,
+            rgba(0,0,0,.72),
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.05)
+        );
+}
+
+.hero-content {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 45px;
+    bottom: 45px;
+
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 58px;
+
+    line-height: .95;
+
+    margin-bottom: 22px;
+
+    letter-spacing: -3px;
+}
+
+
+/* =========================
+   HERO MENU
+========================= */
+
+.hero-menu {
+    display: flex;
+    align-items: center;
+}
+
+.hero-menu a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+}
+
+.hero-menu a:hover {
+    opacity: .55;
+}
+
+.hero-menu a:not(:last-child)::after {
+    content: "|";
+
+    margin: 0 24px;
+
+    opacity: .7;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    margin-bottom: 60px;
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 25px;
+    letter-spacing: -1px;
+}
+
+.section-header span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* =========================
+   ALBUM GRID
+========================= */
+
+.album-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.album {
+    cursor: pointer;
+}
+
+.album-cover {
+    aspect-ratio: 1 / 1;
+
+    background: var(--card);
+
+    overflow: hidden;
+
+    margin-bottom: 12px;
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform .35s ease;
+}
+
+.album:hover .album-cover img {
+    transform: scale(1.04);
+}
+
+.album-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.album-year {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================
+   ALBUM DETAILS
+========================= */
+
+.album-details {
+    display: none;
+
+    margin-top: 35px;
+}
+
+.album-details.active {
+    display: block;
+}
+
+.back-btn {
+    border: 1px solid var(--border);
+
+    background: transparent;
+
+    padding: 10px 16px;
+
+    cursor: pointer;
+
+    margin-bottom: 25px;
+}
+
+.back-btn:hover {
+    background: #111;
+    color: white;
+}
+
+.album-details-title {
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+.song-list {
+    border-top: 1px solid var(--border);
+}
+
+.song-row {
+    display: grid;
+
+    grid-template-columns:
+        45px
+        2fr
+        1.4fr
+        1.2fr
+        70px
+        45px
+        45px;
+
+    min-height: 62px;
+
+    align-items: center;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 13px;
+}
+
+.song-number,
+.song-artist,
+.song-time {
+    color: var(--muted);
+}
+
+.song-artist,
+.song-time {
+    font-size: 12px;
+}
+
+
+/* =========================
+   PARTH'S FAV
+========================= */
+
+.fav-list {
+    border-top: 1px solid var(--border);
+}
+
+.fav-header,
+.fav-item {
+    display: grid;
+
+    grid-template-columns:
+        50px
+        2fr
+        1.5fr
+        1.3fr
+        70px
+        50px
+        50px;
+
+    align-items: center;
+}
+
+.fav-header {
+    min-height: 45px;
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.fav-item {
+    min-height: 62px;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 13px;
+}
+
+.fav-artist,
+.fav-album,
+.fav-time {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   LIKED PAGE
+========================= */
+
+.liked-page {
+    min-height: calc(100vh - 70px);
+}
+
+.liked-container {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 70px 30px;
+}
+
+.liked-title {
+    font-size: 45px;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 10px;
+}
+
+.liked-subtitle {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 40px;
+}
+
+.liked-list {
+    border-top: 1px solid var(--border);
+}
+
+.liked-header,
+.liked-item {
+    display: grid;
+
+    grid-template-columns:
+        50px
+        2fr
+        1.5fr
+        1.3fr
+        70px
+        50px
+        50px;
+
+    align-items: center;
+}
+
+.liked-header {
+    min-height: 45px;
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.liked-item {
+    min-height: 65px;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 13px;
+}
+
+.liked-artist,
+.liked-album,
+.liked-time {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.empty-liked {
+    padding: 50px 0;
+
+    color: var(--muted);
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.play-btn,
+.like-btn {
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+}
+
+.like-btn {
+    transition: .2s ease;
+}
+
+.like-btn:hover {
+    transform: scale(1.15);
+}
+
+.like-btn.liked {
+    color: var(--pink);
+}
+
+
+/* =========================
+   MUSIC VIDEOS
+========================= */
+
+.video-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.video-card {
+    border: 1px solid var(--border);
+
+    background: var(--bg);
+}
+
+.video-card iframe {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    border: 0;
+
+    display: block;
+}
+
+.video-info {
+    padding: 15px;
+}
+
+.video-info h3 {
+    font-size: 14px;
+}
+
+.video-info p {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid var(--border);
+
+    padding: 35px 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+.player {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: var(--player);
+
+    border-top: 1px solid var(--border);
+
+    background: rgba(245,244,239,.97);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 200;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 25px;
+
+    gap: 25px;
+}
+
+.player-info {
+    min-width: 220px;
+}
+
+.player-title {
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.player-artist {
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-top: 4px;
+}
+
+.player-controls {
+    display: flex;
+
+    gap: 18px;
+
+    align-items: center;
+}
+
+.player-controls button {
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+.progress {
+    flex: 1;
+
+    height: 3px;
+
+    background: var(--border);
+}
+
+.progress-bar {
+    width: 0%;
+
+    height: 100%;
+
+    background: #111;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .album-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    main {
+        padding: 20px;
+    }
+
+    .logo {
+        left: 15px;
+        font-size: 17px;
+    }
+
+    .search {
+        width: 220px;
+    }
+
+    .hero {
+        height: 380px;
+    }
+
+    .hero-content {
+        left: 25px;
+        bottom: 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 42px;
+    }
+
+    .hero-menu {
+        flex-wrap: wrap;
+        row-gap: 12px;
+    }
+
+    .hero-menu a:not(:last-child)::after {
+        margin: 0 12px;
+    }
+
+    .album-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fav-header,
+    .liked-header {
+        display: none;
+    }
+
+    .fav-item,
+    .liked-item {
+        grid-template-columns:
+            35px
+            1.5fr
+            45px
+            45px;
+    }
+
+    .fav-artist,
+    .fav-album,
+    .fav-time,
+    .liked-artist,
+    .liked-album,
+    .liked-time {
+        display: none;
+    }
+
+    .player-info {
+        min-width: 120px;
+    }
+
+    .liked-title {
+        font-size: 35px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .search {
+        width: 150px;
+    }
+
+    .hero-content h1 {
+        font-size: 35px;
+    }
+
+    .hero-menu a {
+        font-size: 10px;
+    }
+
+    .album-grid {
+        gap: 10px;
+    }
+
+    .player-info {
+        min-width: 100px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="logo">
+        JUSTIN BIEBER
+    </div>
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search"
+        placeholder="Search songs..."
+    >
+
+</header>
+
+
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
+<div id="mainPage" class="page">
+
+<main>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-slideshow">
+
+        <img
+            src="images/hero1.jpg"
+            class="hero-slide active"
+            alt="Justin Bieber"
+        >
+
+        <img
+            src="images/hero2.jpg"
+            class="hero-slide"
+            alt="Justin Bieber"
+        >
+
+        <img
+            src="images/hero3.jpg"
+            class="hero-slide"
+            alt="Justin Bieber"
+        >
+
+        <img
+            src="images/hero4.jpg"
+            class="hero-slide"
+            alt="Justin Bieber"
+        >
+
+    </div>
+
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-content">
+
+        <h1>
+            JUSTIN BIEBER
+        </h1>
+
+
+        <div class="hero-menu">
+
+            <a href="#home">
+                DISCOVER
+            </a>
+
+            <a href="#albums">
+                ALBUMS
+            </a>
+
+            <a href="#favorites">
+                PARTH'S FAV
+            </a>
+
+            <a href="#" onclick="showLikedPage(); return false;">
+                LIKED
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ALBUMS -->
+
+<section class="section" id="albums">
+
+    <div class="section-header">
+
+        <h2>
+            Album Catalog
+        </h2>
+
+        <span>
+            Click an album to see songs
+        </span>
+
+    </div>
+
+
+    <div
+        class="album-grid"
+        id="albumGrid">
+    </div>
+
+
+    <div
+        class="album-details"
+        id="albumDetails">
+
+        <button
+            class="back-btn"
+            onclick="closeAlbum()">
+
+            ← Back to Albums
+
+        </button>
+
+
+        <h2
+            class="album-details-title"
+            id="albumDetailsTitle">
+        </h2>
+
+
+        <div
+            class="song-list"
+            id="albumSongs">
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PARTH'S FAV -->
+
+<section
+    class="section"
+    id="favorites">
+
+    <div class="section-header">
+
+        <h2>
+            Parth's Fav
+        </h2>
+
+        <span>
+            personly mine fav
+        </span>
+
+    </div>
+
+
+    <div class="fav-list">
+
+        <div class="fav-header">
+
+            <div>SR.</div>
+            <div>SONG</div>
+            <div>ARTIST</div>
+            <div>ALBUM</div>
+            <div>TIME</div>
+            <div>PLAY</div>
+            <div>LIKE</div>
+
+        </div>
+
+
+        <div id="favList">
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- MUSIC VIDEOS -->
+
+<section
+    class="section"
+    id="videos">
+
+    <div class="section-header">
+
+        <h2>
+            Music Videos
+        </h2>
+
+        <span>
+            Official videos
+        </span>
+
+    </div>
+
+
+    <div class="video-grid">
+
+
+        <div class="video-card">
+
+            <iframe
+                src="https://www.youtube.com/embed/DK_0jXPuIr0"
+                allowfullscreen>
+            </iframe>
+
+            <div class="video-info">
+
+                <h3>
+                    What Do You Mean?
+                </h3>
+
+                <p>
+                    Justin Bieber
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="video-card">
+
+            <iframe
+                src="https://www.youtube.com/embed/fRh_vgS2dFE"
+                allowfullscreen>
+            </iframe>
+
+            <div class="video-info">
+
+                <h3>
+                    Sorry
+                </h3>
+
+                <p>
+                    Justin Bieber
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="video-card">
+
+            <iframe
+                src="https://www.youtube.com/embed/oyEuk8j8imI"
+                allowfullscreen>
+            </iframe>
+
+            <div class="video-info">
+
+                <h3>
+                    Love Yourself
+                </h3>
+
+                <p>
+                    Justin Bieber
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+    © sxyPARTH
+
+</footer>
+
+
+</main>
+
+</div>
+
+
+
+<!-- =====================================================
+     LIKED PAGE
+===================================================== -->
+
+<div
+    id="likedPage"
+    class="page hidden liked-page">
+
+
+    <div class="liked-container">
+
+
+        <div class="section-header">
+
+            <div>
+
+                <h1 class="liked-title">
+                    Liked Songs
+                </h1>
+
+                <p class="liked-subtitle">
+                    Your saved Justin Bieber songs
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <button
+            class="back-btn"
+            onclick="showMainPage()">
+
+            ← Back to Discover
+
+        </button>
+
+
+        <!-- LIKED LIST -->
+
+        <div class="liked-list">
+
+
+            <div class="liked-header">
+
+                <div>SR.</div>
+
+                <div>SONG</div>
+
+                <div>ARTIST</div>
+
+                <div>ALBUM</div>
+
+                <div>TIME</div>
+
+                <div>PLAY</div>
+
+                <div>LIKE</div>
+
+            </div>
+
+
+            <div id="likedList">
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     PLAYER
+===================================================== -->
+
+<div class="player">
+
+
+    <div class="player-info">
+
+        <div
+            class="player-title"
+            id="playerTitle">
+
+            Nothing Playing
+
+        </div>
+
+
+        <div
+            class="player-artist"
+            id="playerArtist">
+
+            Justin Bieber
+
+        </div>
+
+    </div>
+
+
+
+    <div class="player-controls">
+
+        <button onclick="previousSong()">
+            ⏮
+        </button>
+
+        <button
+            id="playButton"
+            onclick="togglePlay()">
+
+            ▶
+
+        </button>
+
+        <button onclick="nextSong()">
+            ⏭
+        </button>
+
+    </div>
+
+
+
+    <div class="progress">
+
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   ALBUM DATA
+===================================================== */
+
+const albums = [
+
+    {
+        title: "My World 2.0",
+        year: "2010",
+        image: "images/my-world-2.png",
+
+        songs: [
+
+            ["Baby", "Justin Bieber", "3:36"],
+            ["Somebody to Love", "Justin Bieber", "3:40"],
+            ["Stuck in the Moment", "Justin Bieber", "3:42"],
+            ["U Smile", "Justin Bieber", "3:17"],
+            ["Never Let You Go", "Justin Bieber", "4:24"]
+
+        ]
+    },
+
+
+    {
+        title: "Believe",
+        year: "2012",
+        image: "images/believe.jpg",
+
+        songs: [
+
+            ["Boyfriend", "Justin Bieber", "2:52"],
+            ["As Long as You Love Me", "Justin Bieber", "3:49"],
+            ["Beauty and a Beat", "Justin Bieber", "3:48"],
+            ["All Around the World", "Justin Bieber", "4:03"],
+            ["Die in Your Arms", "Justin Bieber", "3:57"]
+
+        ]
+    },
+
+
+    {
+        title: "Journals",
+        year: "2013",
+        image: "images/journals.png",
+
+        songs: [
+
+            ["Heartbreaker", "Justin Bieber", "4:06"],
+            ["All That Matters", "Justin Bieber", "3:11"],
+            ["Hold Tight", "Justin Bieber", "4:15"],
+            ["Recovery", "Justin Bieber", "3:01"],
+            ["Confident", "Justin Bieber", "4:08"]
+
+        ]
+    },
+
+
+    {
+        title: "Purpose",
+        year: "2015",
+        image: "images/purpose.png",
+
+        songs: [
+
+            ["Mark My Words", "Justin Bieber", "2:14"],
+            ["I'll Show You", "Justin Bieber", "3:19"],
+            ["What Do You Mean?", "Justin Bieber", "3:25"],
+            ["Sorry", "Justin Bieber", "3:20"],
+            ["Love Yourself", "Justin Bieber", "3:53"],
+            ["Company", "Justin Bieber", "3:28"]
+
+        ]
+    },
+
+
+    {
+        title: "Changes",
+        year: "2020",
+        image: "images/changes.png",
+
+        songs: [
+
+            ["All Around Me", "Justin Bieber", "2:16"],
+            ["Habitual", "Justin Bieber", "2:48"],
+            ["Intentions", "Justin Bieber", "3:32"],
+            ["Yummy", "Justin Bieber", "3:30"],
+            ["Changes", "Justin Bieber", "2:15"]
+
+        ]
+    },
+
+
+    {
+        title: "Justice",
+        year: "2021",
+        image: "images/justice.png",
+
+        songs: [
+
+            ["2 Much", "Justin Bieber", "2:32"],
+            ["Deserve You", "Justin Bieber", "3:07"],
+            ["Hold On", "Justin Bieber", "2:50"],
+            ["Anyone", "Justin Bieber", "3:10"],
+            ["Peaches", "Justin Bieber", "3:18"],
+            ["Ghost", "Justin Bieber", "2:33"]
+
+        ]
+    },
+
+
+    {
+        title: "Freedom.",
+        year: "2021",
+        image: "images/freedom.png",
+
+        songs: [
+
+            ["Freedom", "Justin Bieber", "3:08"],
+            ["All She Wrote", "Justin Bieber", "2:54"],
+            ["We're In This Together", "Justin Bieber", "3:17"]
+
+        ]
+    },
+
+
+    {
+        title: "SWAG",
+        year: "2025",
+        image: "images/swag.png",
+
+        songs: [
+
+            ["Daisies", "Justin Bieber", "2:35"],
+            ["Yukon", "Justin Bieber", "3:02"],
+            ["Go Baby", "Justin Bieber", "2:52"]
+
+        ]
+    }
+
+];
+
+
+/* =====================================================
+   PARTH'S FULL FAVOURITES
+===================================================== */
+
+const favSongs = [
+
+    ["Ghost", "Justin Bieber", "Justice", "2:33"],
+
+    ["Somebody", "Justin Bieber", "My World 2.0", "3:27"],
+
+    ["Hold On", "Justin Bieber", "Justice", "2:50"],
+
+    ["Anyone", "Justin Bieber", "Justice", "3:10"],
+
+    ["Peaches", "Justin Bieber feat. Daniel Caesar & Giveon", "Justice", "3:18"],
+
+    ["Lonely", "Justin Bieber & benny blanco", "Justice", "2:29"],
+
+    ["Holy", "Justin Bieber feat. Chance the Rapper", "Justice", "3:32"],
+
+    ["Stay", "The Kid LAROI & Justin Bieber", "Single", "2:21"],
+
+    ["Love Yourself", "Justin Bieber", "Purpose", "3:53"],
+
+    ["Sorry", "Justin Bieber", "Purpose", "3:20"],
+
+    ["Beauty and a Beat", "Justin Bieber feat. Nicki Minaj", "Believe", "3:48"],
+
+    ["Bad Guy (Remix)", "Billie Eilish feat. Justin Bieber", "Single", "3:14"],
+
+    ["What Do You Mean?", "Justin Bieber", "Purpose", "3:25"],
+
+    ["Intentions", "Justin Bieber feat. Quavo", "Changes", "3:32"],
+
+    ["Monster", "Shawn Mendes & Justin Bieber", "Single", "2:52"],
+
+    ["Company", "Justin Bieber", "Purpose", "3:28"],
+
+    ["No Brainer", "DJ Khaled feat. Justin Bieber, Chance the Rapper & Quavo", "Single", "4:20"],
+
+    ["Cold Water", "Major Lazer feat. Justin Bieber & MØ", "Single", "3:05"],
+
+    ["Boyfriend", "Justin Bieber", "Believe", "2:52"],
+
+    ["Yummy", "Justin Bieber", "Changes", "3:30"],
+
+    ["I Don't Care", "Ed Sheeran & Justin Bieber", "Single", "3:39"],
+
+    ["Never Say Never", "Justin Bieber feat. Jaden Smith", "Never Say Never", "3:47"],
+
+    ["Let Me Love You", "DJ Snake feat. Justin Bieber", "Single", "3:25"],
+
+    ["Go Baby", "Justin Bieber", "SWAG", "2:52"],
+
+    ["Daisies", "Justin Bieber", "SWAG", "2:35"],
+
+    ["Walking Away", "Justin Bieber", "SWAG", "3:05"],
+
+    ["Despacito (Remix)", "Luis Fonsi & Daddy Yankee feat. Justin Bieber", "Single", "3:48"],
+
+    ["There She Go", "Justin Bieber feat. Lil Uzi Vert", "SWAG", "2:38"],
+
+    ["Habitual", "Justin Bieber", "Changes", "2:48"],
+
+    ["2U", "David Guetta feat. Justin Bieber", "Single", "3:15"],
+
+    ["Mood (Remix)", "24kGoldn feat. Justin Bieber, J Balvin & iann dior", "Single", "2:34"],
+
+    ["Love Me", "Justin Bieber", "My World", "3:36"],
+
+    ["I'm the One", "DJ Khaled feat. Justin Bieber, Quavo, Chance the Rapper & Lil Wayne", "Single", "4:48"],
+
+    ["As Long as You Love Me", "Justin Bieber feat. Big Sean", "Believe", "3:49"],
+
+    ["Flatline", "Justin Bieber", "Journals", "4:04"],
+
+    ["Maria", "Justin Bieber", "Believe", "4:08"],
+
+    ["Hailey", "Justin Bieber", "Journals", "3:59"],
+
+    ["Confident", "Justin Bieber feat. Chance the Rapper", "Journals", "4:08"]
+
+];
+
+
+/* =====================================================
+   LIKED SONGS
+===================================================== */
+
+let likedSongs =
+    JSON.parse(localStorage.getItem("likedJustinSongs")) || [];
+
+
+/* =====================================================
+   RENDER ALBUMS
+===================================================== */
+
+function renderAlbums() {
+
+    const grid =
+        document.getElementById("albumGrid");
+
+    grid.innerHTML = "";
+
+    albums.forEach((album, index) => {
+
+        grid.innerHTML += `
+
+            <div
+                class="album"
+                onclick="openAlbum(${index})">
+
+                <div class="album-cover">
+
+                    <img
+                        src="${album.image}"
+                        alt="${album.title}">
+
+                </div>
+
+                <div class="album-title">
+                    ${album.title}
+                </div>
+
+                <div class="album-year">
+                    ${album.year}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+   OPEN ALBUM
+===================================================== */
+
+function openAlbum(index) {
+
+    const album = albums[index];
+
+    document.getElementById("albumGrid")
+        .style.display = "none";
+
+    document.getElementById("albumDetails")
+        .classList.add("active");
+
+    document.getElementById("albumDetailsTitle")
+        .textContent =
+        album.title + " — " + album.year;
+
+    const container =
+        document.getElementById("albumSongs");
+
+    container.innerHTML = "";
+
+    album.songs.forEach((song, i) => {
+
+        const liked =
+            isLiked(song[0]);
+
+        container.innerHTML += `
+
+            <div class="song-row">
+
+                <div class="song-number">
+                    ${String(i + 1).padStart(2, "0")}
+                </div>
+
+                <div>
+                    <strong>${song[0]}</strong>
+                </div>
+
+                <div class="song-artist">
+                    ${song[1]}
+                </div>
+
+                <div>
+                    ${album.title}
+                </div>
+
+                <div class="song-time">
+                    ${song[2]}
+                </div>
+
+                <button
+                    class="play-btn"
+                    onclick="playSong(
+                        '${escapeJS(song[0])}',
+                        '${escapeJS(song[1])}'
+                    )">
+
+                    ▶
+
+                </button>
+
+                <button
+                    class="like-btn ${liked ? "liked" : ""}"
+                    onclick="toggleLike(
+                        '${escapeJS(song[0])}',
+                        '${escapeJS(song[1])}',
+                        '${escapeJS(album.title)}',
+                        '${escapeJS(song[2])}'
+                    )">
+
+                    ♥
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById("albumDetails")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =====================================================
+   CLOSE ALBUM
+===================================================== */
+
+function closeAlbum() {
+
+    document.getElementById("albumGrid")
+        .style.display = "grid";
+
+    document.getElementById("albumDetails")
+        .classList.remove("active");
+
+}
+
+
+/* =====================================================
+   RENDER PARTH'S FAV
+===================================================== */
+
+function renderFavorites() {
+
+    const container =
+        document.getElementById("favList");
+
+    container.innerHTML = "";
+
+    favSongs.forEach((song, index) => {
+
+        const liked =
+            isLiked(song[0]);
+
+        container.innerHTML += `
+
+            <div
+                class="fav-item"
+                data-search="${(
+                    song[0] +
+                    " " +
+                    song[1] +
+                    " " +
+                    song[2]
+                ).toLowerCase()}">
+
+                <div>
+                    ${String(index + 1).padStart(2, "0")}
+                </div>
+
+                <strong>
+                    ${song[0]}
+                </strong>
+
+                <span class="fav-artist">
+                    ${song[1]}
+                </span>
+
+                <span class="fav-album">
+                    ${song[2]}
+                </span>
+
+                <span class="fav-time">
+                    ${song[3]}
+                </span>
+
+                <button
+                    class="play-btn"
+                    onclick="playSong(
+                        '${escapeJS(song[0])}',
+                        '${escapeJS(song[1])}'
+                    )">
+
+                    ▶
+
+                </button>
+
+                <button
+                    class="like-btn ${liked ? "liked" : ""}"
+                    onclick="toggleLike(
+                        '${escapeJS(song[0])}',
+                        '${escapeJS(song[1])}',
+                        '${escapeJS(song[2])}',
+                        '${escapeJS(song[3])}'
+                    )">
+
+                    ♥
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+   RENDER LIKED PAGE
+===================================================== */
+
+function renderLiked() {
+
+    const container =
+        document.getElementById("likedList");
+
+    container.innerHTML = "";
+
+    if (likedSongs.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-liked">
+
+                No liked songs yet.
+                Click ♥ on a song to add it here.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    likedSongs.forEach((song, index) => {
+
+        container.innerHTML += `
+
+            <div class="liked-item">
+
+                <div>
+                    ${String(index + 1).padStart(2, "0")}
+                </div>
+
+                <strong>
+                    ${song.song}
+                </strong>
+
+                <span class="liked-artist">
+                    ${song.artist}
+                </span>
+
+                <span class="liked-album">
+                    ${song.album}
+                </span>
+
+                <span class="liked-time">
+                    ${song.time}
+                </span>
+
+                <button
+                    class="play-btn"
+                    onclick="playSong(
+                        '${escapeJS(song.song)}',
+                        '${escapeJS(song.artist)}'
+                    )">
+
+                    ▶
+
+                </button>
+
+                <button
+                    class="like-btn liked"
+                    onclick="removeLike(
+                        '${escapeJS(song.song)}'
+                    )">
+
+                    ♥
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+   LIKE / UNLIKE
+===================================================== */
+
+function toggleLike(
+    song,
+    artist,
+    album,
+    time
+) {
+
+    const exists =
+        likedSongs.some(
+            item => item.song === song
+        );
+
+
+    if (exists) {
+
+        likedSongs =
+            likedSongs.filter(
+                item => item.song !== song
+            );
+
+    } else {
+
+        likedSongs.push({
+
+            song: song,
+
+            artist: artist,
+
+            album: album,
+
+            time: time
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "likedJustinSongs",
+        JSON.stringify(likedSongs)
+    );
+
+
+    renderFavorites();
+
+    renderLiked();
+
+}
+
+
+/* =====================================================
+   REMOVE LIKE
+===================================================== */
+
+function removeLike(song) {
+
+    likedSongs =
+        likedSongs.filter(
+            item => item.song !== song
+        );
+
+    localStorage.setItem(
+        "likedJustinSongs",
+        JSON.stringify(likedSongs)
+    );
+
+    renderLiked();
+
+    renderFavorites();
+
+}
+
+
+/* =====================================================
+   CHECK LIKE
+===================================================== */
+
+function isLiked(song) {
+
+    return likedSongs.some(
+        item => item.song === song
+    );
+
+}
+
+
+/* =====================================================
+   SHOW LIKED PAGE
+===================================================== */
+
+function showLikedPage() {
+
+    document.getElementById("mainPage")
+        .classList.add("hidden");
+
+    document.getElementById("likedPage")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    renderLiked();
+
+}
+
+
+/* =====================================================
+   SHOW MAIN PAGE
+===================================================== */
+
+function showMainPage() {
+
+    document.getElementById("likedPage")
+        .classList.add("hidden");
+
+    document.getElementById("mainPage")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =====================================================
+   PLAYER
+===================================================== */
+
+let isPlaying = false;
+
+let progress = 0;
+
+
+function playSong(title, artist) {
+
+    document.getElementById("playerTitle")
+        .textContent = title;
+
+    document.getElementById("playerArtist")
+        .textContent = artist;
+
+    isPlaying = true;
+
+    document.getElementById("playButton")
+        .textContent = "❚❚";
+
+}
+
+
+function togglePlay() {
+
+    isPlaying = !isPlaying;
+
+    document.getElementById("playButton")
+        .textContent =
+        isPlaying ? "❚❚" : "▶";
+
+}
+
+
+function previousSong() {
+
+    progress = 0;
+
+}
+
+
+function nextSong() {
+
+    progress = 0;
+
+}
+
+
+/* DEMO PLAYER PROGRESS */
+
+setInterval(() => {
+
+    if (isPlaying) {
+
+        progress += .5;
+
+        if (progress >= 100) {
+            progress = 0;
+        }
+
+        document.getElementById(
+            "progressBar"
+        ).style.width =
+            progress + "%";
+
+    }
+
+}, 1000);
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+    .getElementById("searchInput")
+    .addEventListener("input", function() {
+
+        const query =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        /* Search Parth's Fav */
+
+        document
+            .querySelectorAll(".fav-item")
+            .forEach(item => {
+
+                const text =
+                    item.dataset.search;
+
+                item.style.display =
+                    text.includes(query)
+                    ? "grid"
+                    : "none";
+
+            });
+
+
+        /* Search albums */
+
+        document
+            .querySelectorAll(".album")
+            .forEach(album => {
+
+                const text =
+                    album.textContent
+                        .toLowerCase();
+
+                album.style.display =
+                    text.includes(query)
+                    ? "block"
+                    : "none";
+
+            });
+
+    });
+
+
+/* =====================================================
+   SLIDESHOW
+===================================================== */
+
+const slides =
+    document.querySelectorAll(".hero-slide");
+
+let currentSlide = 0;
+
+
+function showSlide(index) {
+
+    slides.forEach(slide => {
+
+        slide.classList.remove("active");
+
+    });
+
+    slides[index]
+        .classList.add("active");
+
+}
+
+
+setInterval(() => {
+
+    currentSlide++;
+
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
+
+    showSlide(currentSlide);
+
+}, 5000);
+
+
+/* =====================================================
+   ESCAPE TEXT
+===================================================== */
+
+function escapeJS(text) {
+
+    return String(text)
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'")
+        .replace(/\n/g, "\\n");
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+renderAlbums();
+
+renderFavorites();
+
+renderLiked();
+
+</script>
+
+</body>
+</html>
