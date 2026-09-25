@@ -1,7 +1,3 @@
-/* =========================
-   RESET
-========================= */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -29,11 +25,6 @@ body {
     color: var(--text);
     padding-bottom: var(--player);
 }
-
-
-/* =========================
-   TOP BAR
-========================= */
 
 .topbar {
     height: 70px;
@@ -80,11 +71,6 @@ body {
     box-shadow: 0 0 0 4px var(--pink-soft);
 }
 
-
-/* =========================
-   LAYOUT
-========================= */
-
 .sidebar {
     display: none;
 }
@@ -93,11 +79,6 @@ main {
     margin-left: 0;
     padding: 30px;
 }
-
-
-/* =========================
-   HERO
-========================= */
 
 .hero {
     position: relative;
@@ -159,11 +140,6 @@ main {
     text-shadow: 0 4px 20px rgba(0,0,0,.25);
 }
 
-
-/* =========================
-   HERO MENU
-========================= */
-
 .hero-menu {
     display: flex;
     align-items: center;
@@ -189,11 +165,6 @@ main {
     opacity: 0.5;
 }
 
-
-/* =========================
-   SECTIONS
-========================= */
-
 .section {
     margin-bottom: 55px;
 }
@@ -215,11 +186,6 @@ main {
     color: var(--muted);
     font-size: 12px;
 }
-
-
-/* =========================
-   ALBUMS
-========================= */
 
 .album-grid {
     display: grid;
@@ -270,11 +236,6 @@ main {
     margin-top: 4px;
 }
 
-
-/* =========================
-   ALBUM DETAILS
-========================= */
-
 .album-details {
     display: none;
     margin-top: 35px;
@@ -308,11 +269,6 @@ main {
     color: var(--pink-deep);
 }
 
-
-/* =========================
-   SONG LIST
-========================= */
-
 .song-list {
     border-top: 1px solid var(--border);
     background: var(--card);
@@ -331,7 +287,6 @@ main {
         70px
         45px
         45px;
-
     align-items: center;
     min-height: 62px;
     border-bottom: 1px solid var(--border);
@@ -381,11 +336,6 @@ main {
     color: var(--pink);
 }
 
-
-/* =========================
-   PARTH'S FAV
-========================= */
-
 .fav-list {
     border-top: 1px solid var(--border);
     background: var(--card);
@@ -405,7 +355,6 @@ main {
         70px
         45px
         45px;
-
     align-items: center;
     padding: 0 16px;
 }
@@ -441,11 +390,6 @@ main {
     font-size: 12px;
 }
 
-
-/* =========================
-   LIKED SONGS
-========================= */
-
 .liked-list {
     border-top: 1px solid var(--border);
     background: var(--card);
@@ -465,7 +409,6 @@ main {
         70px
         45px
         45px;
-
     align-items: center;
     padding: 0 16px;
 }
@@ -507,11 +450,6 @@ main {
     font-size: 13px;
     text-align: center;
 }
-
-
-/* =========================
-   MUSIC VIDEOS
-========================= */
 
 .video-grid {
     display: grid;
@@ -555,11 +493,6 @@ main {
     margin-top: 5px;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
-
 footer {
     border-top: 1px solid var(--border);
     padding: 35px 0;
@@ -567,11 +500,6 @@ footer {
     font-size: 12px;
     text-align: center;
 }
-
-
-/* =========================
-   BOTTOM PLAYER
-========================= */
 
 .player {
     position: fixed;
@@ -584,7 +512,6 @@ footer {
     backdrop-filter: blur(10px);
     z-index: 200;
     box-shadow: 0 -4px 20px rgba(232, 85, 142, 0.10);
-
     display: flex;
     align-items: center;
     padding: 0 25px;
@@ -644,13 +571,7 @@ footer {
     border-radius: 999px;
 }
 
-
-/* =========================
-   TABLET
-========================= */
-
 @media (max-width: 1000px) {
-
     .album-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -675,13 +596,7 @@ footer {
     }
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 750px) {
-
     main {
         padding: 20px;
     }
@@ -741,7 +656,6 @@ footer {
             1.5fr
             50px
             40px;
-
         gap: 5px;
     }
 
@@ -779,13 +693,7 @@ footer {
     }
 }
 
-
-/* =========================
-   SMALL MOBILE
-========================= */
-
 @media (max-width: 500px) {
-
     .search {
         width: 150px;
     }
