@@ -1,24 +1,13 @@
-/* =========================
-   SPOTIFY PLAY BUTTON
-========================= */
-
 function playSong(title, artist = "Justin Bieber") {
     const query = encodeURIComponent(title + " " + artist);
-
     window.open(
         "https://open.spotify.com/search/" + query,
         "_blank"
     );
 }
 
-
-/* =========================
-   ALBUM SONGS
-========================= */
-
 function openAlbum(albumName) {
     const album = albums.find(a => a.name === albumName);
-
     if (!album) return;
 
     const albumDetails = document.getElementById("albumDetails");
@@ -26,19 +15,11 @@ function openAlbum(albumName) {
     albumDetails.innerHTML = `
         <div class="album-detail-header">
             <button class="back-btn" onclick="closeAlbum()">← Back</button>
-
             <h2>${album.name}</h2>
             <p>${album.artist || "Justin Bieber"}</p>
         </div>
-
         <div class="album-song-list">
-
             ${album.songs.map((song, index) => {
-
-                // Supports both:
-                // "Song Name"
-                // { title: "Song Name", artist: "Justin Bieber", time: "3:20" }
-
                 const title =
                     typeof song === "string"
                         ? song
@@ -56,20 +37,16 @@ function openAlbum(albumName) {
 
                 return `
                     <div class="album-song">
-
                         <span class="song-number">
                             ${String(index + 1).padStart(2, "0")}
                         </span>
-
                         <div class="song-info">
                             <strong>${title}</strong>
                             <span>${artist}</span>
                         </div>
-
                         <span class="song-time">
                             ${time}
                         </span>
-
                         <button
                             class="play-btn"
                             onclick="playSong('${escapeJS(title)}', '${escapeJS(artist)}')"
@@ -77,7 +54,6 @@ function openAlbum(albumName) {
                         >
                             ▶
                         </button>
-
                         <button
                             class="like-btn"
                             onclick="toggleLike('${escapeJS(title)}', '${escapeJS(artist)}', '${escapeJS(album.name)}', '${escapeJS(time)}')"
@@ -85,12 +61,9 @@ function openAlbum(albumName) {
                         >
                             ♡
                         </button>
-
                     </div>
                 `;
-
             }).join("")}
-
         </div>
     `;
 
@@ -103,37 +76,21 @@ function openAlbum(albumName) {
     });
 }
 
-
-/* =========================
-   CLOSE ALBUM
-========================= */
-
 function closeAlbum() {
     document.getElementById("albumDetails").style.display = "none";
     document.getElementById("albums").style.display = "block";
 }
-
-
-/* =========================
-   ESCAPE TEXT FOR ONCLICK
-========================= */
 
 function escapeJS(text) {
     return String(text || "")
         .replace(/\\/g, "\\\\")
         .replace(/'/g, "\\'")
         .replace(/"/g, '\\"')
-        .replace(/\n/g, "\\n")
-        .replace(/\r/g, "\\r");
+        .replace(/\n/g, "\\\n")
+        .replace(/\r/g, "\\\r");
 }
 
-
-/* =========================
-   LIKE / UNLIKE SONG
-========================= */
-
 function toggleLike(title, artist, album, time) {
-
     let likedSongs =
         JSON.parse(localStorage.getItem("likedJustinSongs")) || [];
 
@@ -144,20 +101,14 @@ function toggleLike(title, artist, album, time) {
     );
 
     if (index !== -1) {
-
-        // Remove from liked
         likedSongs.splice(index, 1);
-
     } else {
-
-        // Add to liked
         likedSongs.push({
             title: title,
             artist: artist,
             album: album,
             time: time
         });
-
     }
 
     localStorage.setItem(
@@ -168,81 +119,57 @@ function toggleLike(title, artist, album, time) {
     renderLiked();
 }
 
-
-/* =========================
-   RENDER LIKED SONGS
-========================= */
-
 function renderLiked() {
-
     const likedList = document.getElementById("likedList");
-
     if (!likedList) return;
 
     const likedSongs =
         JSON.parse(localStorage.getItem("likedJustinSongs")) || [];
 
     if (likedSongs.length === 0) {
-
         likedList.innerHTML = `
             <div class="empty-liked">
                 <h2>No liked songs yet</h2>
                 <p>Click ♡ on any song to add it here.</p>
             </div>
         `;
-
         return;
     }
 
     likedList.innerHTML = likedSongs.map((song, index) => {
-
         return `
             <div class="liked-song-row">
-
                 <span class="song-number">
                     ${String(index + 1).padStart(2, "0")}
                 </span>
-
                 <div class="song-info">
                     <strong>${song.title}</strong>
                     <span>${song.artist}</span>
                 </div>
-
                 <span class="song-album">
                     ${song.album}
                 </span>
-
                 <span class="song-time">
                     ${song.time || ""}
                 </span>
-
                 <button
                     class="play-btn"
                     onclick="playSong('${escapeJS(song.title)}', '${escapeJS(song.artist)}')"
                 >
                     ▶
                 </button>
-
                 <button
                     class="like-btn liked"
                     onclick="toggleLike('${escapeJS(song.title)}', '${escapeJS(song.artist)}', '${escapeJS(song.album)}', '${escapeJS(song.time)}')"
                 >
                     ♥
                 </button>
-
             </div>
         `;
-
     }).join("");
 }
 
-
-/* =========================
-   LIKED PAGE
-========================= */
-
 function showLikedPage() {
-
     document.getElementById("mainPage").classList.add("hidden");
     document.getElementById("likedPage").classList.remove("hidden");
 
@@ -254,13 +181,7 @@ function showLikedPage() {
     });
 }
 
-
-/* =========================
-   BACK TO MAIN PAGE
-========================= */
-
 function showMainPage() {
-
     document.getElementById("likedPage").classList.add("hidden");
     document.getElementById("mainPage").classList.remove("hidden");
 
@@ -270,13 +191,7 @@ function showMainPage() {
     });
 }
 
-
-/* =========================
-   ALBUM DATA
-========================= */
-
 const albums = [
-
     {
         name: "My World 2.0",
         artist: "Justin Bieber",
@@ -308,7 +223,6 @@ const albums = [
             }
         ]
     },
-
     {
         name: "Believe",
         artist: "Justin Bieber",
@@ -340,7 +254,6 @@ const albums = [
             }
         ]
     },
-
     {
         name: "Journals",
         artist: "Justin Bieber",
@@ -372,7 +285,6 @@ const albums = [
             }
         ]
     },
-
     {
         name: "Purpose",
         artist: "Justin Bieber",
@@ -409,7 +321,6 @@ const albums = [
             }
         ]
     },
-
     {
         name: "Changes",
         artist: "Justin Bieber",
@@ -441,7 +352,6 @@ const albums = [
             }
         ]
     },
-
     {
         name: "Justice",
         artist: "Justin Bieber",
@@ -478,7 +388,6 @@ const albums = [
             }
         ]
     },
-
     {
         name: "Freedom.",
         artist: "Justin Bieber",
@@ -500,7 +409,6 @@ const albums = [
             }
         ]
     },
-
     {
         name: "SWAG",
         artist: "Justin Bieber",
@@ -522,49 +430,29 @@ const albums = [
             }
         ]
     }
-
 ];
 
-
-/* =========================
-   RENDER ALBUMS
-========================= */
-
 function renderAlbums() {
-
     const albumGrid = document.getElementById("albumGrid");
-
     if (!albumGrid) return;
 
     albumGrid.innerHTML = albums.map(album => {
-
         return `
             <div
                 class="album-card"
                 onclick="openAlbum('${escapeJS(album.name)}')"
             >
-
                 <div class="album-cover">
                     <span>${album.name}</span>
                 </div>
-
                 <h3>${album.name}</h3>
                 <p>${album.artist}</p>
-
             </div>
         `;
-
     }).join("");
 }
 
-
-/* =========================
-   INITIAL LOAD
-========================= */
-
 document.addEventListener("DOMContentLoaded", function () {
-
     renderAlbums();
     renderLiked();
-
 });
